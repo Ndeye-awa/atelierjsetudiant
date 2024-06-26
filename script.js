@@ -1,88 +1,18 @@
-const students = [ 
-    {
-    prenom: "Mouhamad",
-    nom: "Sall",
-    note: 12,
-    age: 16,
-},
-
-{
-    prenom: "Aminata",
-    nom: "Diagne",
-    note: 16,
-    age: 18,
-},
-
-{
-    prenom: "Faty",
-    nom: "Camara",
-    note: 17,
-    age: 20,
-},
-
-{
-    prenom: "Mariama",
-    nom: "Balde",
-    note: 18,
-    age: 14,
-},
-
-{
-    prenom: "Awa",
-    nom: "Paye",
-    note: 15,
-    age: 21,
-},
-
-{
-  prenom: "Fatou",
-  nom: "Fall",
-  note: 11,
-  age: 19,
-},
-
-{
-  prenom: "Adrien",
-  nom: "Preira",
-  note: 15,
-  age: 21,
-},
-
-{
-  prenom: "Sokhna",
-  nom: "Cisse",
-  note: 13,
-  age: 20,
-},
-
-{
-  prenom: "Khadim",
-  nom: "Sene",
-  note: 17,
-  age: 18,
-},
-
-{
-  prenom: "Marietou",
-  nom: "Amara",
-  note: 10,
-  age: 21,
-},
-
-{
-  prenom: "Mouminatou",
-  nom: "Diop",
-  note: 19,
-  age: 21,
-},
-
-{
-  prenom: "Lamtoro",
-  nom: "Thiam",
-  note: 16,
-  age: 17,
-},
-];
+// const students = [ 
+    // {prenom: "Mouhamad", nom: "Sall", note: 12, age: 16 },
+    // {prenom: "Aminata", nom: "Diagne", note: 16, age: 18 },
+    // {prenom: "Faty", nom: "Camara", note: 17, age: 20 },
+    // {prenom: "Mariama", nom: "Balde", note: 18, age: 14 },
+    // {prenom: "Awa", nom: "Paye", note: 15, age: 21 },
+    // {prenom: "Fatou", nom: "Fall", note: 11, age: 19 },
+    // {prenom: "Adrien", nom: "Preira", note: 15, age: 21 },
+    // {prenom: "Sokhna", nom: "Cisse", note: 13, age: 20 },
+    // {prenom: "Khadim", nom: "Sene", note: 17, age: 18 },
+    // {prenom: "Marietou", nom: "Amara", note: 10, age: 21 },
+    // {prenom: "Mouminatou", nom: "Diop", note: 19, age: 21 },
+    // {prenom: "Lamtoro", nom: "Thiam", note: 16, age: 17 }
+// ];
+const students = JSON.parse(localStorage.getItem('students'))
 
 const NbreEtudiantsPage = 6;
 let PageCurrent = 1;
@@ -136,18 +66,23 @@ function compterAge() {
 // let resultCard4 = document.getElementById("card4")
 // resultCard4.innerText = "Le nombre des ages est égal à " + compterAge(students)
 
+let iconeSupprimer = '<button type="button" class="btn  btn-outline-danger ms-5 me-5" onclick="deleteStudent(event)"><i class="fa-solid fa-trash m-auto" onclick="deleteStudent(event)"></i></button>';
+let iconeModifier = '<button type="button" class="btn btn-outline-primary" onclick="editStudent(event)"><i class="fa-solid fa-pen m-auto"></i></button>';
 
 // Fonction pour afficher les étudiants
 function AfficheEtudiant(EtudiantAffiche) {
     const tbody = document.getElementById('Tbody');
     tbody.innerHTML = '';
 
+    const startIndex = (PageCurrent - 1) * NbreEtudiantsPage;
+
     // utiliser la boucle for pour afficher
      for (let i = 0; i < EtudiantAffiche.length; i++) {
-        const student = EtudiantAffiche[i]
+        const student = EtudiantAffiche[i];
         const tr = document.createElement('tr');
-        tr.innerHTML = `<td>${student.nom}</td><td>${student.prenom}</td><td>${student.note}</td><td>${student.age}</td>`;
+        tr.innerHTML = `<td>${student.nom}</td><td>${student.prenom}</td><td>${student.note}</td><td>${student.age}</td><td>${iconeSupprimer} ${iconeModifier}</td>`;
         tbody.appendChild(tr);
+
      }
 
     // utiliser map et une boucle for pour afficher
@@ -205,7 +140,7 @@ function filtre() {
     AfficheEtudiant(EtudiantAffiche);
     Pagination(EtudiantFiltres);
 
-    document.getElementById('MoyGen').innerText = Moyenne();
+    document.getElementById('MoyGen').innerText = Moyenne().toFixed(2);
     document.getElementById('card1').innerText = SommeNote();
     document.getElementById('card2').innerText = "La somme des ages est égale à " + SommeAge();
     document.getElementById('card3').innerText = "Le nombre de note est égal à " + compterNotes(students);
@@ -245,35 +180,99 @@ bouttonAjout.addEventListener('click', () =>{
     viderChamp()
 })
 
-let envoyerModal = document.getElementById('envoyerModal');
-    envoyerModal.addEventListener('click', () => {
+// let envoyerModal = document.getElementById('envoyerModal');
+//     envoyerModal.addEventListener('click', () => {
+//     let ajoutPrenom = document.getElementById('ajoutPrenom').value;
+//     let ajoutNom = document.getElementById('ajoutNom').value;
+//     let ajoutNote = parseFloat(document.getElementById('ajoutNote').value);
+//     let ajoutAge = parseInt(document.getElementById('ajoutAge').value);
+
+//     if (ajoutPrenom===''||ajoutNom===''|| ajoutNote===''||ajoutAge==='') {
+//         alert('veiller remplir tous les champs correctement.');
+//     } else {
+//         const nouveauEtudiant = {
+//             prenom: ajoutPrenom,
+//             nom: ajoutNom,
+//             note: ajoutNote,
+//             age: ajoutAge,
+//         }
+//         students.push(nouveauEtudiant)
+
+//         // localStorage.setItem('prenom', ajoutPrenom)
+//         // localStorage.setItem('nom', ajoutNom)
+//         // localStorage.setItem('note', ajoutNote)
+//         // localStorage.setItem('age', ajoutAge)
+
+
+//         localStorage.setItem('students', JSON.stringify(students));
+
+//     }
+//     viderChamp()
+//     filtre()
+//     // console.log(students);
+// })
+
+
+document.getElementById('envoyerModal').addEventListener('click', () => {
     let ajoutPrenom = document.getElementById('ajoutPrenom').value;
     let ajoutNom = document.getElementById('ajoutNom').value;
-    let ajoutNote = document.getElementById('ajoutNote').value;
-    let ajoutAge = document.getElementById('ajoutAge').value;
+    let ajoutNote = parseFloat(document.getElementById('ajoutNote').value);
+    let ajoutAge = parseInt(document.getElementById('ajoutAge').value);
 
-    if (ajoutPrenom===''||ajoutNom===''|| ajoutNote===''||ajoutAge==='') {
-        alert('veiller remplir tous les champs');
+    if (ajoutPrenom === '' || ajoutNom === '' || isNaN(ajoutNote) || isNaN(ajoutAge)) {
+        alert('Veuillez remplir tous les champs.');
     } else {
         const nouveauEtudiant = {
             prenom: ajoutPrenom,
             nom: ajoutNom,
-            note: parseFloat(ajoutNote),
-            age: parseInt(ajoutAge),
-        }
-        students.push(nouveauEtudiant)
+            note: ajoutNote,
+            age: ajoutAge
+        };
+        students.push(nouveauEtudiant);
+        localStorage.setItem('students', JSON.stringify(students));
 
-        localStorage.setItem('prenom', ajoutPrenom)
-        localStorage.setItem('nom', ajoutNom)
-        localStorage.setItem('note', ajoutNote)
-        localStorage.setItem('age', ajoutAge)
-
+        viderChamp();
+        filtre();
+        modal.hide();
     }
-    viderChamp()
-    filtre()
-    // console.log(students);
-})
+});
 
+// function editStudent(index) {
+//     const student = students[index];
+//     document.getElementById('ajoutPrenom').value = student.prenom;
+//     document.getElementById('ajoutNom').value = student.nom;
+//     document.getElementById('ajoutNote').value = student.note;
+//     document.getElementById('ajoutAge').value = student.age;
+//     modal.show();
+//     // modal.style.display='block';
+//     document.getElementById('envoyerModal').onclick = () => {
+//         student.prenom = document.getElementById('ajoutPrenom').value;
+//         student.nom = document.getElementById('ajoutNom').value;
+//         student.note = parseFloat(document.getElementById('ajoutNote').value);
+//         student.age = parseInt(document.getElementById('ajoutAge').value);
+//         localStorage.setItem('students', JSON.stringify(students));
+//         filtre();
+//         // modal.style.display='none';
+//         modal.hide();
 
+//     };
+// }
 
+function deleteStudent(index) {
+    students.splice(index, 1);
+    localStorage.setItem('students', JSON.stringify(students));
+    filtre();
+}
 
+function editStudent(index){
+    const etudiant = students.find(students => etudiant.index === index);
+    if (etudiant) {
+        document.document.getElementById('ajoutNom').value = etudiant.nom;
+        document.document.getElementById('ajoutPrenom').value = etudiant.prenom;
+        document.document.getElementById('ajoutNote').value = etudiant.note;
+        document.document.getElementById('ajoutAge').value = etudiant.age;
+
+        editStudent(index);
+        modal.style.display = "block";
+    }
+}
