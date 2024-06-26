@@ -264,15 +264,15 @@ function deleteStudent(index) {
     filtre();
 }
 
-function editStudent(index){
-    const etudiant = students.find(students => etudiant.index === index);
-    if (etudiant) {
-        document.document.getElementById('ajoutNom').value = etudiant.nom;
-        document.document.getElementById('ajoutPrenom').value = etudiant.prenom;
-        document.document.getElementById('ajoutNote').value = etudiant.note;
-        document.document.getElementById('ajoutAge').value = etudiant.age;
+// function editStudent(index){
+//     const etudiant = students.find(students => etudiant.index === index);
+//     if (etudiant) {
+//         document.document.getElementById('ajoutNom').value = etudiant.nom;
+//         document.document.getElementById('ajoutPrenom').value = etudiant.prenom;
+//         document.document.getElementById('ajoutNote').value = etudiant.note;
+//         document.document.getElementById('ajoutAge').value = etudiant.age;
 
-        editStudent(index);
-        modal.style.display = "block";
-    }
-}
+//         editStudent(index);
+//         modal.style.display = "block";
+//     }
+// }
