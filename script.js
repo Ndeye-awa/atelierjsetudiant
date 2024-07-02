@@ -1,3 +1,10 @@
+
+
+
+
+
+
+
 // const students = [ 
 //     {prenom: "Mouhamad", nom: "Sall", note: 12, age: 16 },
 //     {prenom: "Aminata", nom: "Diagne", note: 16, age: 18 },
@@ -98,23 +105,6 @@ function AfficheEtudiant(EtudiantAffiche) {
 
     }
 }
-
-    // utiliser map et une boucle for pour afficher
-    // const studentMap = students.map(student => {
-    // const tr = document.createElement('tr');
-    // tr.innerHTML = `<td>${student.nom}</td><td>${student.prenom}</td><td>${student.note}</td><td>${student.age}</td>`;
-    // return tr 
-    // })
-    // for (const lignes of studentMap) {
-    //      tbody.appendChild(lignes)
-    // }
-
-    // une autre utilisation de map
-//     EtudiantAffiche.map(student => {
-//         const tr = document.createElement('tr');
-//         tr.innerHTML = `<td>${student.nom}</td><td>${student.prenom}</td><td>${student.note}</td><td>${student.age}</td>`;
-//         tbody.appendChild(tr);
-// });
 
 
 function Pagination(EtudiantPagination) {
